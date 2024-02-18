@@ -6,9 +6,10 @@ public class LifeCycle {
 	//private static Map map;
 	private static int timeStep =0;
 	public static void main(String[] args) {
-		
+		System.out.println("compile");
+
 		while(true) {
-			
+
 			broadcastTasks();
 			
 			timeStep++;
