@@ -4,18 +4,22 @@ public class LifeCycle {
 	
 	//private static MessageBox messageBox;
 	//private static Map map;
+	private static int taskLifeTime;
 	private static int timeStep =0;
 	public static void main(String[] args) {
 		System.out.println("compile");
 
 		while(true) {
-
+			generateTasks();
+			
 			broadcastTasks();
 			//test commit line
 			timeStep++;
 		}
 
 	}
+	
+	
 	
 	public static void broadcastTasks() {
 		//inform all agents of all tasks one by one.
