@@ -1,6 +1,7 @@
 package simulation;
 
 public class LifeCycle {
+	public static final int AGENT_CAPACITY = 10;
 	
 	//private static MessageBox messageBox;
 	//private static Map map;
