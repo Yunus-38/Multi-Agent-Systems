@@ -1,2 +1,2 @@
 # Multi-Agent-Systems
- Project involving independent agents.
+This repository open for working Multi-Agent-Systems. We are currently working on CCBA algorithm.
