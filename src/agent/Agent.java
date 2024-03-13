@@ -6,8 +6,7 @@ import java.util.List;
 import static simulation.LifeCycle.AGENT_CAPACITY;
 
 public class Agent {
-
-     //bakiye vereceğiz, configuration
+    
     private List<Task> taskList;
     private int agent_id;
     private Position position;
@@ -32,7 +31,7 @@ public class Agent {
 
     public void updateTaskList(){
     }
-    public void buildBundle(List<Task> bundle, List<Task> path, List<Double> scoreList, List<Integer> scoreListIndex) {
+/*    public void buildBundle(List<Task> bundle, List<Task> path, List<Double> scoreList, List<Integer> scoreListIndex) {
         //cij değeri=o task için diğerlerine göre daha iyi yapabiliyor mu
         //yij=diğer agentların o task için verdiği değer
         //hij eğer cij>yij den = 1;
@@ -41,21 +40,28 @@ public class Agent {
             double maxAgentIndex;
             double maxValue = 0;
             int task_id=-1;
-            for(int i=0; i< taskList.size() ; i++ ){
-                for(int j=0;j<scoreList.size();j++){
-                    double taskScore=scoringFunction(path,taskList.get(i));
-                    if( taskScore > scoreList.get(j)){
-                        h.add(1);
-                        if(taskScore>maxValue){
-                            maxValue=taskScore;
-                            maxAgentIndex=scoreListIndex.get(i);
-                            task_id=j;
-                        }
-                    }
-                    else{
-                        h.add(0);
-                    }
+            List<Double>
+            for(int i=0; i< taskList.size() ; i++ ) {
+                if (!bundle.contains(task_id)) {
+                    double taskScore = scoringFunction(path, taskList.get(i));
+
                 }
+                else {
+
+                }
+            }
+            for(int i=0; i< taskList.size() ; i++ ) {
+                if (taskScore > y.get(i)) {
+                    h.add(1);
+                    if (taskScore > maxValue) {
+                        maxValue = taskScore;
+                        maxAgentIndex = z.get(i);
+                        task_id = i;
+                    }
+                } else {
+                    h.add(0);
+                }
+            }
             }
             if(task_id != -1) {
                 bundle.add(taskList.get(task_id));
@@ -66,7 +72,46 @@ public class Agent {
                 scoreListIndex.set(selectedTaskScoreIndex,agent_id);
             }
         }
+    }*/
+public void buildBundle() {
+    double[] c= new double[taskList.size()];
+    while(bundle.size()< AGENT_CAPACITY){
+
+        for(int i=0; i< taskList.size() ; i++ ) {
+            if (!bundle.contains(taskList.get(i).getTaskId())) {
+                c[i] = scoringFunction(taskList.get(i).getTaskId());
+            }
+            else {
+                c[i]= y.get(taskList.get(i).getTaskId());
+                //index==task id mi?
+            }
+        }
+        int[] h =  new int[taskList.size()];
+        for(int i=0; i< taskList.size() ; i++ ){
+            if(c[i]> y.get(taskList.get(i).getTaskId())){
+                h[i]=1;
+            }
+            else{
+                h[i]=0;
+            }
+        }
+        double maxValue=0;
+        int maxIndex=-1;
+        for(int i=0;i< taskList.size();i++){
+                if(h[i]*c[i]>maxValue){
+                    maxValue=c[i];
+                    maxIndex=taskList.get(i).getTaskId();
+                }
+        }
+        //ni,j=argmaxN...
+        //ni = pathde nereye ekleyeceğim index
+        bundle.add(taskList.get(maxIndex));
+        path.add(taskList.get(maxIndex));
+        y.set(maxIndex,maxValue);
+        z.set(maxIndex,agent_id);
     }
+}
+
 
     public void move(Position destinationPosition) {
         //hareket ettikten sonraki pozisyonu döndürecek
@@ -102,7 +147,9 @@ public class Agent {
         //küçükse de aynı mantıkla devam edeceğiz
 
     }
-    public double scoringFunction(List<Task> path,Task task){
+    public double scoringFunction(int taskId){
+    //path
+        //pathde nereye ekleyeceğimin fonksiyonunu içerir
         return 1;
     }
 
